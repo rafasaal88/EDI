@@ -38,8 +38,8 @@ class Punto2D{
 
 		}
 
-		double setX(double nuevoX){x_=nuevoX;};
-		double setY(double nuevoY){y_=nuevoY;};
+		void setX(double nuevoX){x_=nuevoX;};
+		void setY(double nuevoY){y_=nuevoY;};
 };
 
 }
