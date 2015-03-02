@@ -16,7 +16,7 @@ void cargarcontorno(vector <Punto2D> &contorno, string fichero)
 	 	contorno.push_back(punto);
 
 	}
-		
+	//	contorno.pop_back();
 
 	fichero1.close();
 
@@ -51,33 +51,37 @@ double error(const vector<Punto2D> &contorno, const vector<int> &aproximacion)
 
 	for(int i=0; i<aproximacion.size()-1; i++){
 
-		Punto2D puntoinicial=Punto2D(contorno[aproximacion[i]]);
-		Punto2D puntofinal=Punto2D(contorno[aproximacion[i+1]]);
-		Recta2D recta=Recta2D(puntoinicial, puntofinal);
+			int aprox1=aproximacion[i];
+			int aprox2=aproximacion[(i+1) % aproximacion.size()];
 
-		if(aproximacion[i]<aproximacion[i+1]){
+			Punto2D puntoinicial=Punto2D(contorno[aprox1]);
+			Punto2D puntofinal=Punto2D(contorno[aprox2]);
+			Recta2D recta=Recta2D(puntoinicial, puntofinal);
 
-			for(int j=aproximacion[i]+1; j<aproximacion[i+1]; j++){
+			
 
-				error+=pow(recta.distancia(contorno[j]),2);
+
+			if(aprox1<aprox2)
+			{
+
+				for(int j=aprox1+1; j<aprox2; j++){
+
+					error+=pow(recta.distancia(contorno[j]),2);
+
+				}
 
 			}
 
+			else
+			{	
+				for(int k=aprox1+1; k<contorno.size(); k++){
+					error+=pow(recta.distancia(contorno[k]), 2);
+				}
+
+				for(int l=0; l<aprox2; l++){
+					error+=pow(recta.distancia(contorno[l]), 2);
+				}		
+			}			
 		}
-
-		else{
-			for(int k=aproximacion[i]+1; k<contorno.size(); k++){
-				error+=pow(recta.distancia(contorno[k]), 2);
-			}
-
-			for(int l=0; l<aproximacion[i+1]; l++){
-				error+=pow(recta.distancia(contorno[l]), 2);
-			}
-	
-		}
-
-		
-		
-	}
-	return error;	
+		return error;
 }
