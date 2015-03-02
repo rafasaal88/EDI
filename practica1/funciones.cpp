@@ -36,7 +36,7 @@ void cargaraproximacion(vector <int> &aproximacion, string fichero)
 
 		aproximacion.push_back(x);
 	}
-		aproximacion.pop_back();
+	//aproximacion.pop_back();
 
 
 	fichero1.close();
@@ -51,8 +51,8 @@ double error(const vector<Punto2D> &contorno, const vector<int> &aproximacion)
 
 	for(int i=0; i<aproximacion.size()-1; i++){
 
-		Punto2D puntoinicial=contorno[aproximacion[i]];
-		Punto2D puntofinal=contorno[aproximacion[i+1]];
+		Punto2D puntoinicial=Punto2D(contorno[aproximacion[i]]);
+		Punto2D puntofinal=Punto2D(contorno[aproximacion[i+1]]);
 		Recta2D recta=Recta2D(puntoinicial, puntofinal);
 
 		if(aproximacion[i]<aproximacion[i+1]){
@@ -66,11 +66,11 @@ double error(const vector<Punto2D> &contorno, const vector<int> &aproximacion)
 		}
 
 		else{
-			for(int k=aproximacion[i]; k<aproximacion[contorno.size()-1]; k++){
+			for(int k=aproximacion[i]+1; k<contorno.size(); k++){
 				error+=pow(recta.distancia(contorno[k]), 2);
 			}
 
-			for(int l=0; l<aproximacion[i]; l++){
+			for(int l=0; l<aproximacion[i+1]; l++){
 				error+=pow(recta.distancia(contorno[l]), 2);
 			}
 	

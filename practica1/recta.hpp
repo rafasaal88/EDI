@@ -46,9 +46,9 @@ namespace ed{
 				double distancia(const Punto2D &p) const{
 				return ((abs(a_*p.getX() + b_*p.getY() + c_))/ (sqrt(pow(a_, 2) + pow(b_, 2))));};
 
-			void setA(double nuevoA){a_=nuevoA;};
-			void setB(double nuevoB){b_=nuevoB;};
-			void setC(double nuevoC){c_=nuevoC;};
+			void setA(const double nuevoA){a_=nuevoA;};
+			void setB(const double nuevoB){b_=nuevoB;};
+			void setC(const double nuevoC){c_=nuevoC;};
 
 	};
 
