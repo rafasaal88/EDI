@@ -1,5 +1,9 @@
 #include "cabecera.hpp"
 
+using namespace std;
+using namespace ed;
+
+
 int main()
 {
 

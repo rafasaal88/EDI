@@ -12,9 +12,6 @@
 #include "punto2D.hpp"
 #include "recta.hpp"
 
-using namespace std;
-using namespace ed;
-
 void cargarcontorno(vector <Punto2D> &contorno, string fichero);
 void cargaraproximacion(vector <int> &aproximacion, string fichero);
 double error(const vector<Punto2D> &contorno, const vector<int> &aproximacion);
