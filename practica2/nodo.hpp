@@ -1,6 +1,8 @@
 #ifndef NODO_H
 #define NODO_H
 
+
+namespace ed{
 template <class T>
 class Nodo{
 	
@@ -27,36 +29,8 @@ class Nodo{
 		//modificadores
 
 		void setNodo(const T &nodo){nodo_=nodo;};
-		void setAnt(const T * ant){ant_=ant;};
-		void setSig(const T * sig){sig_=sig;};
+		void setAnt(const Nodo<T> * ant){ant_=ant;};
+		void setSig(const Nodo<T> * sig){sig_=sig;};
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 #endif
