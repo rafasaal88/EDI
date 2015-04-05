@@ -7,7 +7,7 @@
 #include <vector>
 
 using namespace ed;
-namespace ed{
+namespace edi{
 
 template <class T>
 class Lista{
@@ -15,19 +15,18 @@ class Lista{
 	private:
 		Nodo<T> *cabeza_;
 		Nodo<T>	*actual_;
-		Nodo<T> *anterior_;
-
+		
 	public:
 
 		Lista()
 		{
 			cabeza_=0;
 			actual_=0;
-			anterior_=0;
+			
 			//(assert(estaVacia()));
 		};
 
-		//Obeservadores y modificadores de la clase lista
+		//Observadores y modificadores de la clase lista
 		Nodo<T> *getCabeza() const{return cabeza_;};
 
 		void setCabeza(Nodo<T> *newV){cabeza_=newV;};
@@ -66,9 +65,133 @@ class Lista{
 
 			}
 
+		bool estaVacia() const{
+				return getCabeza()==0;
+
+			}
 		
+		T& item(const int pos) const{
+				int indice=0;
+				assert (esValida(pos));
+				Nodo<T> * aux=getCabeza();
+				
+				while((aux!=0)&&(indice<pos))
+				{
+					indice++;
+					aux=aux->getSig();
+				}
+				return aux->getNodo();
+			}
+
+		int buscaItem(const T &item, const int from){
+				assert (esValida(from));
+				int indice=0;
+				Nodo<T> * aux=getCabeza();
+				while((aux!=0)&&(indice<from))
+				{
+					indice++;
+					aux=aux->getSig();
+				}
+				while((aux!=0)&&(aux->getNodo()!=item))
+				{
+					indice++;
+					aux=aux->getSig();
+				}
+				if (aux==0)
+				{
+					return -1;
+				}
+					return indice;
+			}
+
+		void inserta(const T &item){
+			Nodo<T> * nodo(0,0,item);
+
+			if(estaVacia()){
+				setCabeza(nodo);
+				return true;
+			}
+
+			else{
+				Nodo<T> *n=getCabeza();
+				Nodo<T> *aux;
+				for(;;)
+				{
+					if(n->getSig())
+						{
+							if(item > n.item())
+							{
+								n=n->getSig();
+							}						
+							else
+							{
+								aux=n->getAnt();
+								n->setAnt(nodo);
+								nodo->setAnt(aux);
+								nodo->setSig(n);
+								return true;
+							}
+
+						}
+					else
+					{
+						if(item< n->item)
+						{
+							setCabeza(nodo);
+							nodo->setAnt(n);
+							setAct(nodo);
+							return true;
+						}
+						else
+						{
+							n->setSig(nodo);
+							nodo->setAnt(n);
+							setAct(nodo);
+							return true;
+						}
+
+					}
+
+				}
+			}
+
+		}
+
+		void borraPosicion(const int pos){
+			assert(not estaVacia());
+			assert(esValida(pos));
+			
+			Nodo<T> * actual=getAct();
+			goTo(pos);
+
+			if(actual.getAnt()==0)
+			{
+				setCabeza(actual->getSig());
+			}
+			else
+			{
+				Nodo<T> * sig=actual.getSig();
+				Nodo<T> * ant=actual.getAnt();
+			}
+
+			delete actual;
+
+
+		}
+
+		void goTo(const int pos){
+
+			setCabeza(getCabeza());
+			//setAnt(0);
+			for(int i=0; i<pos and actual_!=0; i++){
+				setAnt(getAct());
+				setAct(getAct()->getSig());
+			}
+		}
+
 
 
 };
+
 }
 #endif

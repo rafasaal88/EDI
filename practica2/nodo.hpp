@@ -2,7 +2,7 @@
 #define NODO_H
 
 
-namespace ed{
+namespace edi{
 template <class T>
 class Nodo{
 	

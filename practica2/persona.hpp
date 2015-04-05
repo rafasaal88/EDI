@@ -2,7 +2,7 @@
   \file   persona.hpp
   \brief  Definición de la clase Persona 
   \author Name
-  \date   16/03/2015using namespace std;
+  \date   16/03/2015
 */
 
 #ifndef _PERSONA_HPP_
@@ -31,7 +31,7 @@ class Persona
 
 	public:
 
-		//! \name Constructores de la clase Punto2D
+		//! \name CONSTRUCTORES
 
 		/*! 
 			\fn        Persona();
