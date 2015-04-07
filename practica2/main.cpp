@@ -1,4 +1,16 @@
-#include "funciones.hpp"
+#include "generarpersona.hpp"
+#include "lista.hpp"
+
+#include <iostream>
+
+
+
+void crearAsignatura(Listadoble<Persona>  &lista);
+void mostrarAscendentemente(const Listadoble<Persona> &lista );
+void mostrarDescendentemente(const Listadoble<Persona> &lista );
+void mostrarEntreAscendentemente(const Listadoble<Persona> &lista );
+void mostrarEntreDescendentemente(const Listadoble<Persona> &lista );
+void modificar(Listadoble<Persona> &lista);
 
 using namespace std;  
 using namespace edi;  
@@ -23,10 +35,6 @@ int main ()
 	}
 
 	while((opcion<0) || (opcion>6));
-
-
-
-
 
 		switch(opcion)
 		{
@@ -56,3 +64,4 @@ int main ()
 
 
 }
+

@@ -1,12 +1,7 @@
-#include "funciones.hpp"
-
-#include <iostream>
+#include "generarpersona.hpp"
+#include "lista.hpp"
 #include <cstring>
-
-
-using namespace std;  
-using namespace edi;  
-
+#include <string>
 
 void crearAsignatura(Listadoble <Persona> &lista) 
 {
@@ -158,3 +153,5 @@ void modificar(Listadoble<Persona> &lista)
 	lista.inserta(auxiliar);
 
 }
+
+

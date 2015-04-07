@@ -5,10 +5,10 @@ main: $(OBJECTS)
 	g++ -o programa.exe  $(OBJECTS)
 	
 
-main.o: main.cpp funciones.hpp lista.hpp nododoble.hpp
+main.o: main.cpp lista.hpp nododoble.hpp
 	g++ -c  main.cpp 
 
-funciones.o: funciones.cpp funciones.hpp lista.hpp nododoble.hpp
+funciones.o: funciones.cpp lista.hpp nododoble.hpp
 	g++ -c  funciones.cpp 
 
 persona.o: persona.cpp persona.hpp
