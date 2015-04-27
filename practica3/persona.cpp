@@ -1,27 +1,28 @@
 /*!
   \file persona.cpp
   \brief  Implememtación de la clase Persona 
-  \author Name
-  \date   16/03/2015
+  \author Rafael Salido Álvarez
+  \date   27/04/2015
 */
 #include <iostream>
 #include "persona.hpp"
+#include <fstream>
 
 using namespace edi;
 
 Persona::Persona(const  string &n, const  string &a, const int &d)
 {
-	nombre(n);
-	apellido(a);
-	dni(d);
+	setNombre(n);
+	setApellido(a);
+	setDni(d);
   	borrado('n');
 };
 
 Persona::Persona()
 {
-	nombre("");
-	apellido("");
-	dni(0);
+	setNombre("");
+	setApellido("");
+	setDni(0);
   	borrado('n');
 };
 		
@@ -34,30 +35,34 @@ Persona & Persona::operator=(const Persona &p)
 {
 	if (this != &p)
 	{
-		nombre(p.nombre());
-		apellido(p.apellido());
-		dni(p.dni());
+		setNombre(p.getNombre());
+		setApellido(p.getApellido());
+		setDni(p.getDni());
 	}
 	return *this;
 };
 	
 bool Persona::operator==(const Persona &p) const
 {
-	return apellido() == p.apellido() and nombre() == p.nombre() and dni() == p.dni();
+	return getApellido() == p.getApellido() and getNombre() == p.getNombre() and getDni() == p.getDni();
 };
 
+bool Persona::operator!=(const Persona &p) const
+{
+	return getApellido() != p.getApellido() or getNombre() != p.getNombre() or getDni() != p.getDni();
+};
 //Sobrecarga del operador < para la ordenación.
 bool Persona::operator<(const Persona &p) const
 {
-	if (apellido() < p.apellido())
+	if (getApellido() < p.getApellido())
 		return true;
-	else if (apellido() == p.apellido())
+	else if (getApellido() == p.getApellido())
 	{
-		if (nombre() < p.nombre())
+		if (getNombre() < p.getNombre())
 			return true;
-		else if (nombre() == p.nombre())
+		else if (getNombre() == p.getNombre())
 		{
-			if (dni() < p.dni())
+			if (getDni() < p.getDni())
 				return true;
 			return false;
 		}
@@ -99,7 +104,7 @@ namespace edi{
 	*/
 	ostream & operator<<( ostream &stream, const Persona &p)
 	{
-		stream << p.nombre() << " " << p.apellido() << " " << p.dni() <<  endl;
+		stream << p.getNombre() << " " << p.getApellido() << " " << p.getDni() <<  endl;
 		return stream;
 	};
 
@@ -118,30 +123,58 @@ namespace edi{
 		int dni;
 		cout << "Nombre: ";
 		stream >> aux;
-		p.nombre(aux);
+		p.setNombre(aux);
 		cout << "Apellido: ";
 		stream >> aux;
-		p.apellido(aux);
+		p.setApellido(aux);
 		cout << "Dni: ";
 		stream >> dni;
-		p.dni(dni);
+		p.setDni(dni);
 		p.borrado('n');
 		
 		return stream;
 	};
+
+  	ofstream & operator<<( ofstream &out, const Persona &p)
+  	{
+  		out << p.getNombre() << " " << p.getApellido() << " " << p.getDni() <<  endl;
+		return out;
+	};
+  	
+			
+		
+  ifstream & operator>>( ifstream &in, Persona &p)
+  {
+  		char aux[30];
+		int dni;
+		
+		in >> aux;
+		p.setNombre(aux);
+		
+		in >> aux;
+		p.setApellido(aux);
+		
+		in >> dni;
+		p.setDni(dni);
+		p.borrado('n');
+		
+		return in;
+  };
+
+
 }
 
-const  string & Persona::nombre()const
+const  string & Persona::getNombre()const
 {
 	return _nombre;
 };
 
-const  string & Persona::apellido()const
+const  string & Persona::getApellido()const
 {
 	return _apellido;
 };
 
-const int & Persona::dni() const
+const int & Persona::getDni() const
 {
 	return _dni;
 };
@@ -151,17 +184,17 @@ const char & Persona::borrado() const
 	return _borrado;
 };
 
-void Persona::nombre(const  string &nombre)
+void Persona::setNombre(const  string &nombre)
 {
 	_nombre = nombre;
 };
 
-void Persona::apellido(const  string &apellido)
+void Persona::setApellido(const  string &apellido)
 {
 	_apellido = apellido;
 };
 
-void Persona::dni(const int &dni)
+void Persona::setDni(const int &dni)
 {
 	_dni = dni;
 };

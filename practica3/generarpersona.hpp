@@ -1,18 +1,15 @@
 /*!
   \file   generarpersona.hpp
   \brief  Prototipos de las funciones auxiliares para generar aleatoriamente personas
-  \author Name
-  \date   16/03/2015
+  \author Rafael Salido Álvarez
+  \date   27/04/2015
 */
 
-#ifndef _GENERAR_PERSONA_HPP_
-#define _GENERAR_PERSONA_HPP_
+#ifndef GENERAR_PERSONA_HPP
+#define GENERAR_PERSONA_HPP
 #include <vector>
 
 #include "persona.hpp"
-
-using namespace std;
-using namespace edi;
 
 /*! 
 	\fn     Persona generarPersona();
@@ -20,10 +17,10 @@ using namespace edi;
 	\return Objeto de la clase Persona
 	\sa     generarPersonas
 */
-const Persona generarPersona();
+const edi::Persona generarPersona();
 
 /*! 
-	\fn     vector <Persona> generarPersonas(const  string &fichero, const int &numeroPersonas);
+	\fn     std::vector <edi::Persona> generarPersonas(const  std::string &fichero, const int &numeroPersonas);
 	\brief  Genera aleatoriamente un vector de Personas
 	\param	fichero Nombre del fichero desde el que se van a leer datos de personas
 	\param	numeroPersonas Número de personas que se van a generar
@@ -32,6 +29,6 @@ const Persona generarPersona();
 	\post   El número de componentes del vector devuelto debe ser igual a numeroPersonas
 	\sa     generarPersona
 */
-vector <Persona> generarPersonas(const  string &fichero, const int &numeroPersonas);
+std::vector <edi::Persona> generarPersonas(const  std::string &fichero, const int &numeroPersonas);
 
 #endif //_GENERAR_PERSONA_HPP_

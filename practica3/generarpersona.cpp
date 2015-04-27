@@ -1,8 +1,8 @@
 /*!
   \file   generarpersona.cpp
   \brief  Codificación de las funciones auxiliares para generar aleatoriamente personas
-  \author Name
-  \date   16/03/2015
+  \author Rafael Salido Álvarez
+  \date   27/04/2015
 */
 
 #include <cstdlib>
@@ -11,7 +11,7 @@
 #include "generarpersona.hpp"
 #include "persona.hpp"
 
-static const  string _apellidos[] = {
+static const  std::string _apellidos[] = {
 "GARCIA",
 "FERNANDEZ",
 "GONZALEZ",
@@ -114,7 +114,7 @@ static const  string _apellidos[] = {
 "ROMAN"
 };
 
-static const  string _nombres[] = {
+static const  std::string _nombres[] = {
 "MARIA_CARMEN",
 "MARIA",
 "CARMEN",
@@ -225,33 +225,33 @@ static inline int generarEnteroAleatorio (const int &min, const int &max)
   return min + rand() % (max - min + 1);
 }
 
-const Persona generarPersona()
+const edi::Persona generarPersona()
 {
-	Persona persona;
+	edi::Persona persona;
 
-	persona.dni(generarEnteroAleatorio(20000000, 70000000));
-    persona.apellido(_apellidos[generarEnteroAleatorio(0, NUMEROAPELLIDOS - 1)]);
-	persona.nombre(_nombres[generarEnteroAleatorio(0, NUMERONOMBRES - 1)]);
+	persona.setDni(generarEnteroAleatorio(20000000, 70000000));
+  persona.setApellido(_apellidos[generarEnteroAleatorio(0, NUMEROAPELLIDOS - 1)]);
+	persona.setNombre(_nombres[generarEnteroAleatorio(0, NUMERONOMBRES - 1)]);
 	persona.borrado('n');
 
   return persona;
 }
 
 //Selecciona personas aleatorias del fichero de personas 
-vector <Persona> generarPersonas(const  string &fichero, const int &numeroPersonas)
+std::vector <edi::Persona> generarPersonas(const  std::string &fichero, const int &numeroPersonas)
 {
-	vector <Persona> v;
-	vector <Persona> personasSeleccionadas;
-	Persona p;
-	string nombre, apellido;
+	std::vector <edi::Persona> v;
+	std::vector <edi::Persona> personasSeleccionadas;
+	edi::Persona p;
+	std::string nombre, apellido;
 	int dni;
 	
-	ifstream f(fichero.c_str());
+	std::ifstream f(fichero.c_str());
 	while (f >> nombre >> apellido >> dni)
 	{
-		p.nombre(nombre);
-		p.apellido(apellido);
-		p.dni(dni);
+		p.setNombre(nombre);
+		p.setApellido(apellido);
+		p.setDni(dni);
 		v.push_back(p);
 	}
 	

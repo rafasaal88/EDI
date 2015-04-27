@@ -1,16 +1,17 @@
 /*!
   \file   persona.hpp
   \brief  Definición de la clase Persona 
-  \author Name
-  \date   16/03/2015using namespace std;
+  \author Rafael Salido Álvarez
+  \date   27/04/2015
 */
 
-#ifndef _PERSONA_HPP_
-#define _PERSONA_HPP_
+#ifndef PERSONA_HPP
+#define PERSONA_HPP
 
 #include <iostream>
 
 using namespace std;
+
 /*! 
   \name Espacio de nombres de la asignatura de Estructuras de datos y de la información
 */
@@ -30,12 +31,12 @@ namespace edi
 				\fn        Persona();
 				\brief     Constructor por defecto de la clase Persona
 				\attention Función sobrecargada	
-				\sa        Persona(const std::string  &n, const  std::string &a, const int &d); Persona(const Persona &p);
+				\sa        Persona(const string  &n, const  string &a, const int &d); Persona(const Persona &p);
 			*/
 			Persona();
 			
 			/*! 
-				\fn    		Persona(const std::string  &n, const  std::string &a, const int &d);
+				\fn    		Persona(const string  &n, const  string &a, const int &d);
 				\brief     Constructor parametrizado de la clase Persona
 				\attention Función sobrecargada
 				\param     n Nombre de la Persona
@@ -50,7 +51,7 @@ namespace edi
 				\brief      Constructor de copia de la clase Persona
 				\attention  Función sobrecargada	
 				\param      p Persona de la que se van copiar los valores de los atributos.
-				\sa         Persona(); Persona(const std::string  &n, const  std::string &a, const int &d); 
+				\sa         Persona(); Persona(const string  &n, const  string &a, const int &d); 
 			*/
 			Persona(const Persona &p);
 			
@@ -75,6 +76,9 @@ namespace edi
 				\sa     operator==, operator<, operator<=, operator>, operator>=
 			*/
 			bool operator==(const Persona &p)const;
+
+			bool operator!=(const Persona &p) const;
+
 			
 			/*! 
 				\fn     bool operator<(const Persona &p) const;
@@ -123,9 +127,9 @@ namespace edi
 				\param	stream Flujo de salida
 				\param  p Persona, cuyos datos se van a escribir en el flujo de salida
 				\return Flujo de salida en el que se han escrito los datos de la Persona
-				\sa    friend  std::istream & operator>>( std::istream &stream, Persona &p);
+				\sa    friend  istream & operator>>( istream &stream, Persona &p);
 			*/
-			friend  ostream & operator<<( std::ostream &stream, const Persona &p);
+			friend  ostream & operator<<( ostream &stream, const Persona &p);
 			
 			/*! 
 				\fn     friend istream & operator>>(istream &stream, Persona &p);
@@ -134,32 +138,54 @@ namespace edi
 				\param	stream Flujo de entrada
 				\param  p Persona, cuyos datos se van a leer desde el flujo de entrada
 				\return Flujo de salida en el que se han escrito los datos de la Persona
-				\sa     friend  std::ostream & operator<<( std::ostream &stream, const Persona &p);
+				\sa     friend  ostream & operator<<( ostream &stream, const Persona &p);
 			*/			
-			friend  istream & operator>>( std::istream &stream, Persona &p);
+			friend  istream & operator>>( istream &stream, Persona &p);
+
+			/*! 
+				\fn     friend ostream & operator<<(ostream &out, const Persona &p);
+				\brief  Escribe los datos de la Persona en un flujo de salida
+				\note   Sobrecarga del operador de salida "<<"
+				\param	out Flujo de salida
+				\param  p Persona, cuyos datos se van a escribir en el flujo de salida
+				\return Flujo de salida en el que se han escrito los datos de la Persona
+				\sa    friend  istream & operator>>( istream &out, Persona &p);
+			*/
+			friend  ofstream & operator<<( ofstream &out, const Persona &p);
+			
+			/*! 
+				\fn     friend istream & operator>>(istream &in, Persona &p);
+				\brief  Lee los datos de la Persona desde un flujo de entrada
+				\note   Sobrecarga del operador de salida ">>"
+				\param	in Flujo de entrada
+				\param  p Persona, cuyos datos se van a leer desde el flujo de entrada
+				\return Flujo de salida en el que se han escrito los datos de la Persona
+				\sa     friend  ostream & operator<<( ostream &in, const Persona &p);
+			*/			
+			friend  ifstream & operator>>( ifstream &in, Persona &p);
 
 			//! \name OBSERVADORES
 
 			/*! 
-				\fn     const std::string &nombre()const;
+				\fn     const string &getNombre()const;
 				\brief  Función que permite consultar el nombre de la Persona
 				\return valor del atributo _nombre
 			*/			
-			const string &nombre()const;
+			const string &getNombre()const;
 			
 			/*! 
-				\fn     const std::string &apellido()const;
+				\fn     const string &getApellido()const;
 				\brief  Función que permite consultar el apellido de la Persona
 				\return valor del atributo _apellido
 			*/
-			const string &apellido()const;
+			const string &getApellido()const;
 			
 			/*! 
-				\fn     const int &dni()const;
+				\fn     const int &getDni()const;
 				\brief  Función que permite consultar el DNI de la Persona
 				\return valor del atributo _dni
 			*/			
-			const int &dni()const;
+			const int &getDni()const;
 			
 			/*! 
 				\fn     const char &borrado() const;
@@ -170,25 +196,25 @@ namespace edi
 			
 		//! \name MODIFICADORES
 			/*! 
-				\fn     void nombre(const  std::string &nombre);
+				\fn     void setNombre(const  string &nombre);
 				\brief  Función que permite modificar el nombre de la Persona
 				\param  nombre Nuevo valor del atributo _nombre
 			*/
-			void nombre(const  string &nombre);
+			void setNombre(const  string &nombre);
 			
 			/*! 
-				\fn     void apellido(const  std::string &apellido);
+				\fn     void setApellido(const  string &apellido);
 				\brief  Función que permite modificar el apellido de la Persona
 				\param  apellido Nuevo valor del atributo _apellido
 			*/			
-			void apellido(const  string &apellido);
+			void setApellido(const  string &apellido);
 			
 			/*! 
-				\fn     void dni(const int &dni);
+				\fn     void setDni(const int &dni);
 				\brief  Función que permite modificar el dni de la Persona
 				\param  dni Nuevo valor del atributo _dni 
 			*/			
-			void dni(const int &dni);
+			void setDni(const int &dni);
 
 			/*! 
 				\fn     void borrado(const char &borrado);
@@ -196,6 +222,8 @@ namespace edi
 				\param  borrado Nuevo valor del atributo _borrado
 			*/
 			void borrado(const char &borrado);
+
+
 	};
 }
 

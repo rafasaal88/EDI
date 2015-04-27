@@ -1,75 +1,109 @@
-/*!
-  \file   main.cpp
-  \brief  Programa que prueba la clase Persona
-  \author Name
-  \date   16/03/2015
-*/
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <cstdlib>
-#include <string>
+#include "funciones.hpp"
 
-#include "persona.hpp"
-#include "generarpersona.hpp"
+using namespace std;  
+using namespace edi;  
 
-using namespace std;
-using namespace edi;
 
-/*! 
-	\fn     int main()
-	\brief  Programa princial
-	\return Valor de control
-*/
-int main()
+int main ()
 {
-	srand(time(0));
-	int numeroPersonas;
-	Persona p;
-	string fichero = "personas.txt";
+	int opcion;
+	ListaDoble<Persona> asignatura;
+	LinkedOrderedBinaryTree<Clave> arbol;
+	string nombreFichero,nombre;
+	int dni,pos;;
+	do{
 	
-	vector <Persona> personas;
-	
-	cout <<" Personas a generar: ";
-	cin >> numeroPersonas;
-	
-	ofstream f(fichero.c_str());
-	
-	for(int i = 1; i <= numeroPersonas ; i++)
-	{
-		p = generarPersona();
-		cout << p;
-		f << p;
-	}
-	
-	f.close();
-	
-	personas = generarPersonas(fichero, 20);
-	Persona aux;
-	
-	unsigned int minimo = 0;
-	
-	for(unsigned int i = 0; i <= personas.size() -2; i++)
-	{
-		minimo = i;
-		for(unsigned int j = i + 1; j <= personas.size() -1; j++)
-	  {
-			if (personas[j] < personas[minimo])
-				minimo = j;
-		}
-		aux = personas[minimo];
-		personas[minimo] = personas[i];
-		personas[i] = aux;
-	}
-		
-		
-	for(unsigned int i = 0; i < personas.size(); i++)
-	{
-		cout << i + 1 << ". ";
-		cout << personas[i];
-	}	
-	
-	return 0;
-}
+			do {
+			cout<<"Menú"<<endl;
+			cout<<"1: crear asignatura"<<endl;
+			cout<<"2: Guardar asignatura."<<endl;
+			cout<<"3: cargar asignatura."<<endl;
+			cout<<"4: Buscar una persona en la asignatura actual."<<endl;
+			cout<<"5: Mostrar alumnos."<<endl;
+			cout<<"0: Salir."<<endl;
 
-	
+			cout<<"Introduzca una opcion: "<<endl;
+			cin>> opcion;
+	}
+
+	while((opcion<0) || (opcion>5));
+
+
+
+		switch(opcion)
+		{
+			case 1:
+					crearAsignatura(asignatura);
+					insertarEnArbol(asignatura, arbol);
+				break;
+
+			case 2:
+					cout<<"Introduce el nombre del fichero a guardar"<<endl;
+					cin>>nombreFichero;
+
+					guardarLista( asignatura, nombreFichero.c_str());
+					pos=nombreFichero.find_first_of('.',0);
+					
+					if(pos>0)
+					{
+						nombre=nombreFichero.substr(0,pos);
+						nombreFichero=nombre + ".idx";
+					}
+
+					else
+					{
+						nombreFichero=nombreFichero+".idx";
+					}
+
+					guardarArbol(arbol, nombreFichero.c_str());
+
+				break;
+			case 3:
+
+					while(arbol.isEmpty()==0)
+					{
+						arbol.removeItem();		
+					}
+
+
+					cout<<"Introduce el nombre del fichero a cargar"<<endl;
+					cin>>nombreFichero;
+					cargarLista(asignatura, nombreFichero.c_str());
+					pos=nombreFichero.find_first_of('.',0);
+					
+					if(pos>0)
+					{
+						nombre=nombreFichero.substr(0,pos);
+						nombreFichero=nombre + ".idx";
+					}
+
+					else
+					{
+						nombreFichero=nombreFichero+".idx";
+					}
+
+
+					cargarArbol(arbol,nombreFichero.c_str());
+
+				break;
+			case 4:
+
+				cout<<"Introduce el dni de la persona a buscar"<<endl;
+				cin>>dni;
+
+				buscar(dni, asignatura, arbol);
+
+					
+				break;
+			case 5:
+				mostrarAscendentemente(asignatura);
+
+					
+				break;
+		}
+
+	}
+	while(opcion!=0);
+
+
+}
